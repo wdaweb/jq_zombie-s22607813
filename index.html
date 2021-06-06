@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>購GO摸摸樂</title>
+    <style>
+        #start_page {
+            width: 1440px;
+            height: 900px;
+            margin: auto;
+            background: url(./images/start_page-3.png);
+            position: absolute;
+            z-index: 1;
+        }
+
+        #game_menu {
+            width: 1440px;
+            height: 100px;
+            position: absolute;
+            top: 100%;
+            transform: translateY(-100%);
+        }
+
+        #game_start {
+            width: 42.5%;
+            height: 100px;
+            float: left;
+            background: rgb(255, 132, 132);
+            text-align: center;
+            line-height: 100px;
+            color: rgb(255, 255, 255);
+            font-size: 2.5rem;
+            font-family: '微軟正黑體';
+            font-weight: bolder;
+            border-radius: 50px;
+            border: 3px solid rgb(255, 255, 255);
+            margin-bottom: 10px;
+            position: absolute;
+            left: 5%;
+            top: -20px;
+
+        }
+
+        #game_start:hover {
+            background: rgb(243, 55, 55);
+            cursor: pointer;
+            box-shadow: 0px 0px 17px 8px rgba(255, 169, 169, 0.73);
+        }
+
+        #game_rule {
+            width: 42.5%;
+            height: 100px;
+            float: right;
+            background: rgb(141, 142, 255);
+            text-align: center;
+            line-height: 100px;
+            color: rgb(255, 255, 255);
+            font-size: 2.5rem;
+            font-family: '微軟正黑體';
+            font-weight: bolder;
+            border-radius: 50px;
+            border: 3px solid rgb(255, 255, 255);
+            position: absolute;
+            top: -20px;
+            left: 95%;
+            transform: translateX(-100%);
+
+        }
+
+        #game_rule:hover {
+            background: rgb(54, 40, 243);
+            cursor: pointer;
+            box-shadow: 0px 0px 17px 8px rgba(182, 169, 255, 0.73);
+        }
+
+        #main {
+            width: 1440px;
+            height: 900px;
+            margin: auto;
+            background: rgb(140, 166, 250);
+            position: relative;
+            border: 1px solid black;
+            overflow: hidden;
+        }
+
+        #right {
+            width: 416px;
+            height: 900px;
+            float: right;
+        }
+
+        #right #dialogue {
+            width: 416px;
+            height: 352px;
+            position: relative;
+        }
+
+        #right #clerk {
+            width: 416px;
+            height: 548px;
+            cursor: url(./images/hand_2.png)10 30, auto;
+        }
+
+        #left {
+            width: 1024px;
+            height: 900px;
+            float: left;
+            background: url(./images/refrigerator-with-food_1203-842.jpg)no-repeat center center/cover;
+            color: white;
+            font-weight: bolder;
+            cursor: url(./images/hand_2.png)10 30, auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #time_up {
+            position: absolute;
+            top: -100%;
+            z-index: 1;
+        }
+
+        #right #dialogue p {
+            background: blue;
+            color: white;
+            margin: 0;
+            padding: 10px;
+            font-family: '微軟正黑體';
+            font-weight: bolder;
+        }
+
+        #text {
+            position: absolute;
+            width: 416px;
+            text-align: center;
+            top: 45%;
+            font-size: 1.5rem;
+            line-height: 80px;
+            font-family: '微軟正黑體';
+        }
+
+        #text2 {
+            position: absolute;
+            width: 416px;
+            text-align: center;
+            top: 45%;
+            font-size: 1.5rem;
+            font-weight: bolder;
+            line-height: 80px;
+            font-family: '微軟正黑體';
+        }
+
+        #game_goods {
+            font-weight: bolder;
+            font-size: 2rem;
+        }
+
+        #goods_money {
+            font-weight: bolder;
+            font-size: 2rem;
+        }
+
+        #timesUp {
+            font-size: 2rem;
+        }
+
+        #rule_page {
+            width: 1440px;
+            height: 900px;
+            background: url(./images/rule-0.png);
+            position: absolute;
+            top: 0px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            z-index: -1;
+        }
+
+        #close {
+            width: 50px;
+            height: 50px;
+            background: black;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            border: 1px solid white;
+            text-align: center;
+            line-height: 50px;
+            font-size: 2rem;
+            font-family: '微軟正黑體';
+            font-weight: bolder;
+            color: white;
+        }
+
+        #close:hover {
+            background: red;
+            cursor: pointer;
+        }
+
+        .display {
+            display: none;
+        }
+
+        .next {
+            position: absolute;
+            bottom: 75px;
+            right: 200px;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 50px 0 50px 86.6px;
+            border-color: transparent transparent transparent #0044ff;
+            z-index: 99;
+        }
+
+        .next:hover {
+            border-color: transparent transparent transparent #4f7eff;
+            cursor: pointer;
+        }
+
+        #next2 {
+            z-index: -1;
+        }
+
+        #next3 {
+            z-index: -1;
+        }
+
+        #understand {
+            position: absolute;
+            bottom: 75px;
+            right: 175px;
+            width: 150px;
+            height: 100px;
+            background: black;
+            color: white;
+            line-height: 100px;
+            text-align: center;
+            font-family: '微軟正黑體';
+            font-weight: bolder;
+            font-size: 2rem;
+            border: 1px solid white;
+            border-radius: 20px;
+        }
+
+        #understand:hover {
+            background: red;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main">
+        <div id="start_page">
+            <div id="game_menu">
+                <div id="game_start">遊戲開始</div>
+                <div id="game_rule">規則說明</div>
+            </div>
+        </div>
+        <div id="rule_page" class="">
+            <div id="close">X</div>
+            <div id="next1" class="next"></div>
+            <div id="next2" class="next"></div>
+            <div id="next3" class="next"></div>
+            <div id="understand" class="display">我明白了</div>
+        </div>
+        <div id="left">
+            <img src="./images/time_up_2.png" id="time_up">
+        </div>
+
+        <div id="right">
+            <div id="dialogue">
+                <p align="center">Time： <span id="game_time">10</span> 秒、獎金： <span id="game_bonus">0</span> 元 </p>
+                <img src="images/dialogue_3.png">
+                <div id="text">
+                    拿到 <span id="game_goods"></span> 
+                    <br>
+                    價值：<span id="goods_money"></span> 元
+                </div>
+                <div id="text2">
+                    <span id="timesUp"></span>
+                    <br/>
+                    <span id="totalMoney"></span>
+                </div>
+            </div>
+            <div id="clerk"><img src="images/clerk_3.png"></div>
+        </div>
+
+    </div>
+    <audio id="audioID" loop>
+        <source src="./music/audio_opening.mp3" type="audio/mp3">
+    </audio>
+
+    <audio id="audioID2">
+        <source src="./music/game_over.mp3" type="audio/mp3">
+    </audio>
+
+
+    <script src="jquery-3.6.0.min.js"></script>
+    <script>
+        let countdown = 0
+        let bonus = 0
+        let goods = 0
+
+        const rand = (num) => {
+            return Math.round(Math.random() * num)
+        }
+
+        const move = (goods) => {
+            goods.stop().animate({
+                left: rand(70) + '%',
+                top: rand(70) + '%',
+                width: `${rand(110) + 40}px`
+            }, 3000, function () {
+                move2(goods)
+            })
+        }
+
+        const move2 = (goods) => {
+            goods.stop().animate({
+                left: rand(60) + '%',
+                top: rand(60) + '%',
+                width: `${rand(100) + 50}px`
+            }, 2000, function () {
+                move(goods)
+            })
+        }
+
+        const move3 = (goods) => {
+            goods.stop().animate({
+                left: rand(80) + '%',
+                top: rand(80) + '%',
+                width: `${rand(80) + 50}px`
+            }, 1000, function () {
+                move3(goods)
+            })
+        }
+
+        const move4 = (goods) => {
+            goods.stop().animate({
+                left: rand(80) + '%',
+                top: rand(80) + '%',
+                width: `${rand(80) + 50}px`
+            }, 600, function () {
+                move4(goods)
+            })
+        }
+
+        $('#game_start').click(function () {
+            $('#audioID').get(0).play()
+            $('#start_page').css('display', 'none')
+
+            countdown = 20
+            $('#game_time').text(countdown)
+
+            bonus = 0
+            $('#game_bonus').text(bonus)
+
+            let gametimer = setInterval(() => {
+                countdown--
+                $('#game_time').text(countdown)
+
+                let num = rand(100)
+                console.log(num);
+                if ((num <= 10 && num > 5 && countdown >= 5) || (num <= 100 && countdown == 10)) {
+                    let switchh = $(`<img src="./images/goods_7.png" class="switches" style="left:${rand(70)}%; top:${rand(70)}%; position: absolute" width="${rand(100) + 50}">`)
+                    $('#left').append(switchh)
+                    move4(switchh)
+                } else if ((num <= 5 && num > 0 && countdown >= 5) || (num <= 100 && countdown == 5)) {
+                    let ps5 = $(`<img src="./images/goods_8.png" class="ps5s" style="left:${rand(70)}%; top:${rand(70)}%; position: absolute" width="${rand(100) + 50}">`)
+                    $('#left').append(ps5)
+                    move4(ps5)
+                } else if (num > 70 && countdown >= 5) {
+                    let drinks = $(`<img src="./images/goods_2.png" class="drinks" style="left:${rand(70)}%; top:${rand(70)}%; position: absolute" width="${rand(100) + 50}">`)
+                    let cookie = $(`<img src="./images/goods_5.png" class="cookies" style="left:${rand(70)}%; top:${rand(70)}%; position: absolute" width="${rand(100) + 50}">`)
+                    $('#left').append(drinks)
+                    $('#left').append(cookie)
+                    move(drinks)
+                    move(cookie)
+                } else if ((num <= 10 && num > 5 && countdown >= 5) || (num <= 100 && countdown == 10)) {
+                    let switchh = $(`<img src="./images/goods_7.png" class="switches" style="left:${rand(70)}%; top:${rand(70)}%; position: absolute" width="${rand(100) + 50}">`)
+                    $('#left').append(switchh)
+                    move4(switchh)
+                } else if ((num <= 5 && num > 0 && countdown >= 5) || (num <= 100 && countdown == 5)) {
+                    let ps5 = $(`<img src="./images/goods_8.png" class="ps5s" style="left:${rand(70)}%; top:${rand(70)}%; position: absolute" width="${rand(100) + 50}">`)
+                    $('#left').append(ps5)
+                    move4(ps5)
+                } else if (num <= 70 && num > 50 && countdown >= 5) {
+                    let drinks_2 = $(`<img src="./images/goods_6.png" class="drinks" style="left:${rand(70)}%; top:${rand(70)}%; position: absolute" width="${rand(100) + 50}">`)
+                    let cookie_2 = $(`<img src="./images/goods_1.png" class="cookies" style="left:${rand(70)}%; top:${rand(70)}%; position: absolute" width="${rand(100) + 50}">`)
+                    $('#left').append(drinks_2)
+                    $('#left').append(cookie_2)
+                    move2(drinks_2)
+                    move2(cookie_2)
+                } else if (num <= 50 && num > 25 && countdown >= 5) {
+                    let cake = $(`<img src="./images/goods_3.png" class="cakes" style="left:${rand(70)}%; top:${rand(70)}%; position: absolute" width="${rand(100) + 50}">`)
+                    $('#left').append(cake)
+                    move2(cake)
+                } else if (num <= 25 && num > 10 && countdown >= 5) {
+                    let cleaner = $(`<img src="./images/goods_4.png" class="vacuum" style="left:${rand(70)}%; top:${rand(70)}%; position: absolute" width="${rand(100) + 50}">`)
+                    $('#left').append(cleaner)
+                    move3(cleaner)
+                } else if (countdown <= 0) {
+                    $('#audioID2').get(0).play()
+                    clearInterval(gametimer)
+                    $('#time_up').animate({
+                        top: 0 + '%'
+                    }, 1000)
+                    $('#text').text('')
+                    $('#timesUp').text(`時間到!!`)
+                    $('#totalMoney').text(`一共拿到價值 ${bonus} 元的商品`)
+                }
+
+                $('#left').unbind().on('click', '.drinks', function () {
+                    $(this).attr('src', '')
+                    $(this).stop()
+                    $(this).css("pointer-events", "none");
+                    bonus+=20
+                    $('#game_bonus').text(bonus)
+                    $('#game_goods').text('飲料')
+                    $('#goods_money').text(20)
+                })
+
+                $('#left').on('click', '.cookies', function () {
+                    $(this).attr('src', '')
+                    $(this).stop()
+                    $(this).css("pointer-events", "none");
+                    bonus+=32
+                    $('#game_bonus').text(bonus)
+                    $('#game_goods').text('餅乾')
+                    $('#goods_money').text(32)
+                })
+
+                $('#left').on('click', '.cakes', function () {
+                    $(this).attr('src', '')
+                    $(this).stop()
+                    $(this).css("pointer-events", "none");
+                    bonus+=529
+                    $('#game_bonus').text(bonus)
+                    $('#game_goods').text('巧克力沙哈')
+                    $('#goods_money').text(529)
+                })
+
+                $('#left').on('click', '.vacuum', function () {
+                    $(this).attr('src', '')
+                    $(this).stop()
+                    $(this).css("pointer-events", "none");
+                    bonus+=8888
+                    $('#game_bonus').text(bonus)
+                    $('#game_goods').text('無線除螨吸塵器')
+                    $('#goods_money').text(8888)
+                })
+
+                $('#left').on('click', '.switches', function () {
+                    $(this).attr('src', '')
+                    $(this).stop()
+                    $(this).css("pointer-events", "none");
+                    bonus+=9780
+                    $('#game_bonus').text(bonus)
+                    $('#game_goods').text(`Switch主機 特別版`)
+                    $('#goods_money').text(9780)
+                })
+
+                $('#left').on('click', '.ps5s', function () {
+                    $(this).attr('src', '')
+                    $(this).stop()
+                    $(this).css("pointer-events", "none");
+                    bonus+=15980
+                    $('#game_bonus').text(bonus)
+                    $('#game_goods').text(`PS5 光碟版主機`)
+                    $('#goods_money').text(15980)
+                })
+
+            }, 1000)
+        })
+
+        $('#close').click(function() {
+            $('#rule_page').css('z-index', '-1')
+        })
+
+        $('#game_rule').click(function() {
+            $('#rule_page').css('background', 'url(./images/rule-0.png)')
+            $('#rule_page').css('z-index', '1')
+            $('#next1').removeClass('display')
+            $('#next2').removeClass('display')
+            $('#next3').removeClass('display')
+            $('#understand').addClass('display')
+        })
+
+        $('#next1').click(function() {
+            $('#rule_page').css('background', 'url(./images/rule-2.png)')
+            $('#next1').addClass('display')
+        })
+
+        $('#next3').click(function() {
+            $('#rule_page').css('background', 'url(./images/rule-3.png)')
+            $('#next3').addClass('display')
+        })
+
+        $('#next2').click(function() {
+            $('#rule_page').css('background', 'url(./images/rule-4.png)')
+            $('#next2').addClass('display')
+            $('#understand').removeClass('display')
+        })
+
+        $('#understand').click(function() {
+            $('#rule_page').css('z-index', '-1')
+        })
+    </script>
+</body>
+
+</html>
